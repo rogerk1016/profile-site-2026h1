@@ -1,0 +1,1640 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roger Chen — 2026 H1 Job Demo</title>
+<meta name="description" content="Roger Chen · MIS · ERP Application Developer · Makalot 2026 H1 工作報告" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy:    '#0E2A4A',
+          'navy-2':'#081B33',
+          'navy-3':'#142F50',
+          royal:   '#1E4D8B',
+          steel:   '#5B7FA8',
+          sky:     '#E8F0FB',
+          hair:    '#D9E1ED',
+          cyan2:   '#39B5D6',
+          gold:    '#C8964B',
+          'gold-2':'#E0AE5E',
+          forest:  '#3A7D5A',
+          coral:   '#D4574E',
+          ink:     '#1A1F2E',
+          body2:   '#4A5568',
+          muted:   '#8A93A6',
+          paper:   '#F8FAFD',
+        },
+        fontFamily: {
+          sans:  ['Inter','Noto Sans TC','PingFang TC','Microsoft JhengHei','system-ui','sans-serif'],
+          mono:  ['JetBrains Mono','SFMono-Regular','Menlo','Monaco','Consolas','monospace'],
+        },
+        boxShadow: {
+          'soft':  '0 1px 2px rgba(14,42,74,0.04), 0 4px 16px rgba(14,42,74,0.06)',
+          'lift':  '0 2px 8px rgba(14,42,74,0.08), 0 16px 40px rgba(14,42,74,0.10)',
+          'card':  '0 1px 3px rgba(14,42,74,0.05), 0 8px 24px rgba(14,42,74,0.08)',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter','Noto Sans TC','PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+    color: #1A1F2E;
+    background: #FFFFFF;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .num,.mono { font-family: 'JetBrains Mono','SFMono-Regular',Menlo,monospace; font-variant-numeric: tabular-nums; }
+  .grain { background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px); background-size: 3px 3px; }
+
+  /* hero gradient */
+  .hero-bg {
+    background:
+      radial-gradient(60% 60% at 80% 0%, rgba(57,181,214,.18) 0%, rgba(57,181,214,0) 60%),
+      radial-gradient(50% 50% at 0% 100%, rgba(200,150,75,.15) 0%, rgba(200,150,75,0) 60%),
+      linear-gradient(180deg, #08182E 0%, #0E2A4A 60%, #142F50 100%);
+  }
+  /* subtle grid */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgba(91,127,168,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(91,127,168,.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* fade up animation on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease-out, transform .8s ease-out; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* nav active link */
+  .navlink { position: relative; }
+  .navlink::after {
+    content:''; position:absolute; left:0; right:0; bottom:-8px; height:2px; background:#C8964B;
+    transform: scaleX(0); transform-origin:left; transition: transform .25s ease;
+  }
+  .navlink:hover::after, .navlink.active::after { transform: scaleX(1); }
+
+  /* scroll progress */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, #C8964B, #39B5D6);
+    width: 0; z-index: 100; transition: width .12s linear;
+  }
+
+  /* chip + pill */
+  .chip { display:inline-flex; align-items:center; gap:.4rem; padding:.3rem .7rem; border-radius:999px;
+          font-size:13px; font-weight:600; letter-spacing:.04em; }
+
+  /* chat */
+  .bubble-user, .bubble-ai {
+    max-width: 78%; padding: 14px 16px 12px; border-radius: 16px;
+    font-size: 14.5px; line-height: 1.6; box-shadow: 0 1px 2px rgba(14,42,74,.05);
+  }
+  .bubble-user {
+    background: linear-gradient(180deg, #1E4D8B 0%, #0E2A4A 100%); color:#fff;
+    border-bottom-right-radius: 4px;
+  }
+  .bubble-ai {
+    background: #F4F7FB; color: #1A1F2E; border: 1px solid #E2E8F2;
+    border-bottom-left-radius: 4px;
+  }
+  .bubble-ai .code {
+    margin-top: 8px; padding: 10px 12px; border-radius: 8px;
+    background: #0E2A4A; color: #C9DDF2; font-family: 'JetBrains Mono',monospace;
+    font-size: 13.5px; line-height: 1.55; overflow-x:auto;
+  }
+  .bubble-ai .code .k { color: #E0AE5E; }
+  .bubble-ai .code .s { color: #9DD7E8; }
+  .bubble-ai .code .c { color: #6E8AA6; font-style: italic; }
+
+  /* project card hover */
+  .proj { transition: transform .35s ease, box-shadow .35s ease; }
+  .proj:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(14,42,74,.10), 0 24px 48px rgba(14,42,74,.12); }
+
+  /* section heading kicker line */
+  .kicker::before {
+    content:''; display:inline-block; width: 28px; height: 2px; background:#C8964B;
+    margin-right: 12px; vertical-align: middle;
+  }
+
+  /* image frame */
+  .frame { background: linear-gradient(180deg, #142F50 0%, #0E2A4A 100%); padding: 8px; border-radius: 14px; box-shadow: 0 4px 12px rgba(14,42,74,.10), 0 24px 48px rgba(14,42,74,.10); }
+  .frame > img { display:block; width:100%; height:auto; border-radius: 8px; }
+
+  /* divider tick marks */
+  .ticks { background-image: linear-gradient(90deg, #D9E1ED 0 50%, transparent 50% 100%); background-size: 16px 100%; height: 1px; }
+
+  /* roadmap road */
+  .road { height: 12px; background: #5B7FA8; border-radius: 999px; position: relative; }
+  .road::after {
+    content:''; position:absolute; top:50%; left:0; right:0; height:2px;
+    background-image: linear-gradient(90deg, #fff 0 12px, transparent 12px 28px);
+    background-size: 28px 2px; transform: translateY(-50%);
+  }
+
+  /* responsive */
+  @media (max-width: 768px) {
+    .hide-mobile { display: none; }
+  }
+  @media (max-width: 640px) {
+    .bubble-user, .bubble-ai { max-width: 92%; }
+  }
+
+  /* selection color */
+  ::selection { background: #C8964B; color: #fff; }
+</style>
+</head>
+<body class="bg-white">
+
+<!-- scroll progress -->
+<div id="progress" class="progress"></div>
+
+<!-- ─────────────────────────── NAV ─────────────────────────── -->
+<nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/75 border-b border-hair/60">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-2.5">
+      <span class="block w-2.5 h-2.5 rounded-full bg-gold"></span>
+      <span class="text-[13px] font-bold tracking-widest text-navy">ROGER&nbsp;·&nbsp;MAKALOT</span>
+    </a>
+    <ul class="hidden md:flex items-center gap-7 text-[13px] font-medium text-body2">
+      <li><a class="navlink" href="#about">About</a></li>
+      <li><a class="navlink" href="#overview">Overview</a></li>
+      <li><a class="navlink" href="#projects">Projects</a></li>
+      <li><a class="navlink" href="#methodology">AI 協作</a></li>
+      <li><a class="navlink" href="#roadmap">Roadmap</a></li>
+      <li><a class="navlink" href="#reflections">Reflections</a></li>
+    </ul>
+    <a href="mailto:rogerchen@makalot.com.tw"
+       class="hidden md:inline-flex items-center gap-2 px-3.5 py-2 rounded-full
+              bg-navy text-white text-[14.5px] font-semibold tracking-wide
+              hover:bg-royal transition-colors">
+      <span class="w-1.5 h-1.5 rounded-full bg-cyan2"></span> Contact
+    </a>
+  </div>
+</nav>
+
+<!-- ─────────────────────────── HERO ─────────────────────────── -->
+<section id="hero" class="relative pt-32 lg:pt-40 pb-28 hero-bg overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-50 pointer-events-none"></div>
+  <!-- decorative gold line + cyan hairline -->
+  <div class="absolute left-6 lg:left-10 top-24 bottom-24 w-[2px] bg-gold/80"></div>
+  <div class="hide-mobile absolute right-10 top-24 bottom-24 w-px bg-cyan2/40"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-7">
+      <div class="text-gold text-[14px] tracking-[0.25em] font-bold mb-4">MAKALOT &nbsp;─&nbsp; ANNUAL REVIEW</div>
+      <h1 class="text-white font-extrabold leading-[1.05] tracking-tight
+                 text-[64px] sm:text-[88px] lg:text-[120px] num">2026<span class="text-cyan2">.</span>H1</h1>
+      <p class="mt-4 text-white/95 text-2xl sm:text-3xl lg:text-4xl font-medium">
+        工作報告 <span class="text-white/60 font-light">·</span> Job Demo
+      </p>
+      <p class="mt-5 text-cyan2 italic text-base lg:text-lg">
+        MIS · 採購 / 成本 / GL · AI 協作實證
+      </p>
+
+      <div class="mt-12 inline-flex items-center gap-3 pl-3 border-l-[3px] border-gold">
+        <div>
+          <div class="text-steel text-[13px] tracking-[0.2em] font-bold">PRESENTED BY</div>
+          <div class="text-white text-[15px] font-semibold mt-1">
+            Roger Chen &nbsp;·&nbsp; <span class="text-gold-2">rogerchen@makalot.com.tw</span>
+          </div>
+          <div class="text-white/55 text-[14px] mt-0.5">May 2026 · MIS · ERP Application Developer</div>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-wrap gap-3">
+        <a href="#projects" class="inline-flex items-center gap-2 px-5 py-3 rounded-full
+                bg-gold text-navy font-semibold text-[13px] hover:bg-gold-2 transition-colors">
+          看 8 個專案
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#methodology" class="inline-flex items-center gap-2 px-5 py-3 rounded-full
+                border border-white/30 text-white font-semibold text-[13px] hover:bg-white/10 transition-colors">
+          AI 協作辦法
+        </a>
+      </div>
+    </div>
+
+    <!-- portrait -->
+    <div class="lg:col-span-5 relative">
+      <div class="relative mx-auto max-w-sm lg:max-w-none">
+        <div class="absolute -inset-4 rounded-2xl bg-gradient-to-br from-cyan2/20 via-transparent to-gold/20 blur-2xl"></div>
+        <div class="relative rounded-2xl overflow-hidden shadow-lift bg-navy-2">
+          <img src="assets/img2.jpg" alt="Roger Chen"
+               class="w-full h-[420px] sm:h-[500px] object-cover object-[center_30%]"/>
+          <!-- caption -->
+          <div class="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-navy-2/95 via-navy-2/40 to-transparent">
+            <div class="flex items-end justify-between">
+              <div>
+                <div class="text-gold text-[13px] tracking-[0.25em] font-bold">ROGER · 2026</div>
+                <div class="text-white text-lg font-semibold mt-1">陳佳麟</div>
+              </div>
+              <div class="chip bg-white/10 text-white/85 backdrop-blur-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan2"></span>MIS
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- scroll cue -->
+  <div class="absolute left-1/2 -translate-x-1/2 bottom-6 flex flex-col items-center gap-2 text-white/50">
+    <span class="text-[12px] tracking-[0.3em] font-bold">SCROLL</span>
+    <span class="block w-px h-10 bg-gradient-to-b from-white/60 to-transparent"></span>
+  </div>
+</section>
+
+<!-- ─────────────────────────── ABOUT ─────────────────────────── -->
+<section id="about" class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12 lg:gap-16">
+    <div class="lg:col-span-4 reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">HELLO  ·  你好</div>
+      <h2 class="mt-4 text-4xl sm:text-5xl font-extrabold text-ink leading-tight">
+        我是 <span class="text-navy">Roger</span>
+      </h2>
+      <p class="mt-5 text-body2 leading-relaxed">
+        在聚陽 MIS 寫 ERP 系統的工程師。<br>
+        H1 從採購、成本到 AI 協作 — 一路把工作做得更輕、更準。
+      </p>
+      <div class="mt-8 inline-flex items-center gap-3 px-4 py-3 rounded-xl bg-sky border border-hair/70">
+        <span class="w-2 h-2 rounded-full bg-forest"></span>
+        <span class="text-[14.5px] text-navy font-semibold mono">rogerchen@makalot.com.tw</span>
+      </div>
+    </div>
+
+    <div class="lg:col-span-8 grid sm:grid-cols-2 gap-6 reveal">
+      <div class="rounded-2xl border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-royal">ROLE</div>
+        <div class="mt-3 text-xl font-bold text-ink">ERP Application Developer</div>
+        <p class="mt-3 text-body2 leading-relaxed text-[14.5px]">
+          從 0→1 設計新系統,也維護既有的關鍵流程。專長 APEX、PL/SQL、D2K Form 以及效能調教。
+        </p>
+      </div>
+      <div class="rounded-2xl border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-cyan2">METHOD</div>
+        <div class="mt-3 text-xl font-bold text-ink">Coder → Reviewer</div>
+        <p class="mt-3 text-body2 leading-relaxed text-[14.5px]">
+          AI 接管 規格比對 / 寫 MD / 改 code<br>我做 想法 + Review + 對答案。
+        </p>
+      </div>
+      <div class="rounded-2xl border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold">DOMAIN</div>
+        <div class="mt-3 text-xl font-bold text-ink">採購 · 成本 · GL</div>
+        <p class="mt-3 text-body2 leading-relaxed text-[14.5px]">
+          PO / AP / GL / COST / VBA 跨模組整合;熟海關、稅務、人薪、信託多種帳務情境。
+        </p>
+      </div>
+      <div class="rounded-2xl bg-navy text-white p-7 shadow-card">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold">H1 FAVORITE</div>
+        <div class="mt-3 text-xl font-bold">BGD AP→GL · 32 HR → 3 HR</div>
+        <p class="mt-3 text-white/75 leading-relaxed text-[14.5px]">
+          AI 接管 60% 環節,我把預期 3-5 工作天的工作壓到 3 小時完工 — 省 ~90% 工時。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── OVERVIEW STATS ─────────────────────────── -->
+<section id="overview" class="py-24 lg:py-28 bg-paper border-y border-hair">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex items-end justify-between flex-wrap gap-4 reveal">
+      <div>
+        <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">OVERVIEW</div>
+        <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink">2026 H1 工作概覽</h2>
+        <p class="mt-2 text-body2">27 件工作 · 8 大主軸 · 從採購流程到 AI 協作的完整作業鏈</p>
+      </div>
+      <div class="text-[13px] tracking-[0.25em] font-bold text-muted">UPDATED · MAY 2026</div>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="mt-10 grid sm:grid-cols-3 gap-5 lg:gap-6 reveal">
+      <div class="relative bg-white rounded-2xl border border-hair p-7 shadow-soft overflow-hidden">
+        <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-navy"></span>
+        <div class="text-[13px] tracking-[0.25em] font-bold text-steel">TOTAL WORKS</div>
+        <div class="mt-2 text-6xl font-extrabold num text-navy">27</div>
+        <div class="mt-1 text-[13px] text-body2">件 · H1 總工作</div>
+      </div>
+      <div class="relative bg-white rounded-2xl border border-hair p-7 shadow-soft overflow-hidden">
+        <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-forest"></span>
+        <div class="text-[13px] tracking-[0.25em] font-bold text-steel">COMPLETION</div>
+        <div class="mt-2 text-6xl font-extrabold num text-forest">85.2%</div>
+        <div class="mt-1 text-[13px] text-body2">完成率 <span class="mono">(23 / 27)</span></div>
+      </div>
+      <div class="group relative bg-white rounded-2xl border border-hair p-7 shadow-soft cursor-help">
+        <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-gold rounded-l-2xl"></span>
+        <div class="text-[13px] tracking-[0.25em] font-bold text-steel">AI COLLAB</div>
+        <div class="mt-2 text-6xl font-extrabold num text-gold">22.2%</div>
+        <div class="mt-1 text-[13px] text-body2">AI 協作比例 <span class="mono">(6 / 27)</span></div>
+        <!-- Hover tooltip -->
+        <div class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 z-20">
+          <div class="bg-ink text-white text-[14.5px] leading-relaxed rounded-lg shadow-card px-4 py-3">
+            四月初開始使用 AI 協作,所以 H1 的比例較低。<br>接下來 H2 預計拉高到 <span class="font-bold text-gold">70% 以上</span>。
+            <span class="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-ink"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mini charts panel -->
+    <div class="mt-6 grid lg:grid-cols-3 gap-5 lg:gap-6 reveal">
+      <!-- 型態分布 bar -->
+      <div class="bg-white rounded-2xl border border-hair p-6 shadow-soft">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-navy">型態分布</div>
+        <div class="mt-6 grid grid-cols-3 gap-4 items-end h-48">
+          <div class="flex flex-col items-center justify-end h-full">
+            <div class="text-[13px] font-bold num text-ink mb-1">15</div>
+            <div class="w-12 bg-navy rounded-t-md" style="height:80%"></div>
+            <div class="mt-2 text-[14px] text-body2">維護</div>
+          </div>
+          <div class="flex flex-col items-center justify-end h-full">
+            <div class="text-[13px] font-bold num text-ink mb-1">10</div>
+            <div class="w-12 bg-cyan2 rounded-t-md" style="height:55%"></div>
+            <div class="mt-2 text-[14px] text-body2">開發</div>
+          </div>
+          <div class="flex flex-col items-center justify-end h-full">
+            <div class="text-[13px] font-bold num text-ink mb-1">2</div>
+            <div class="w-12 bg-steel rounded-t-md" style="height:12%"></div>
+            <div class="mt-2 text-[14px] text-body2">其他</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 狀態占比 -->
+      <div class="bg-white rounded-2xl border border-hair p-6 shadow-soft">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-navy">狀態占比</div>
+        <div class="mt-6">
+          <div class="text-[14.5px] text-steel font-bold">已完成</div>
+          <div class="mt-1 text-5xl font-extrabold num text-forest">85.2%</div>
+          <div class="mt-1 text-[14px] text-body2 mono">23 / 27</div>
+        </div>
+        <div class="mt-4 flex h-3 rounded-full overflow-hidden bg-hair/40">
+          <div class="bg-forest" style="width:85.2%"></div>
+          <div class="bg-coral" style="width:11.1%"></div>
+          <div class="bg-muted" style="width:3.7%"></div>
+        </div>
+        <div class="mt-3 flex flex-wrap gap-3 text-[13px] text-body2">
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-forest"></span>已完成 23</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-coral"></span>進行中 3</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-muted"></span>暫停 1</span>
+        </div>
+      </div>
+
+      <!-- 模組工作量 -->
+      <div class="bg-white rounded-2xl border border-hair p-6 shadow-soft">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-navy">模組工作量</div>
+        <div class="mt-5 space-y-2 text-[14px]">
+          <!-- rows -->
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">GL</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:100%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">7</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">PO</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">COST</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">VBA</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">PR</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">HR</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">ERP</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+          <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">AP</span>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── PROJECTS ─────────────────────────── -->
+<section id="projects" class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">CHAPTER  ·  PROJECTS</div>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink">8 個主要專案</h2>
+      <p class="mt-2 text-body2 max-w-2xl">每個專案的關鍵畫面、設計考量、與這次學到的事 — 順序對應到 H1 的工作節奏。</p>
+    </div>
+
+    <div class="mt-16 space-y-24 lg:space-y-32">
+
+      <!-- ── PROJECT 01 採購合約系統 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">01</span>
+            <span class="chip bg-sky text-royal">PO  ·  全生命週期</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">採購合約系統開發</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            公司原本沒有合約管理機制 — 因為沒有,才從零打造。
+            APEX + Oracle DB,從 HS_CODE 主檔到合約 / 銀行報表全鏈串通。
+          </p>
+          <ul class="mt-5 space-y-2 text-[14px] text-ink">
+            <li class="flex gap-2"><span class="text-gold">①</span> Fabric / Accessory 切換</li>
+            <li class="flex gap-2"><span class="text-gold">②</span> 蒐集 PO → 一鍵建立合約</li>
+            <li class="flex gap-2"><span class="text-gold">③</span> HS_CODE 257 筆物料分類主檔</li>
+            <li class="flex gap-2"><span class="text-gold">④</span> 預先取號的「空合約」機制(上線後優化)</li>
+          </ul>
+          <div class="mt-6 inline-flex items-center gap-3 px-4 py-2.5 rounded-lg bg-sky/70 border border-hair">
+            <span class="w-1.5 h-1.5 rounded-full bg-coral"></span>
+            <span class="text-[14.5px] text-navy font-semibold">反思 · 下次會在開發階段就引入 AI 協作,加速迭代</span>
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <div class="frame"><img src="assets/img3.jpg" alt="採購合約系統主畫面" loading="lazy"/></div>
+          <div class="mt-3 text-[14px] text-muted italic">採購合約系統主畫面 — 從待蒐集 PO 到已建立合約的完整工作面板</div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 02 副料簽核 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl border border-hair bg-white p-6 lg:p-7 shadow-soft">
+            <!-- Tool header -->
+            <div class="flex items-center justify-between border-b border-hair pb-4">
+              <div>
+                <div class="text-[13px] tracking-[0.25em] font-bold text-steel">SIM TOOL</div>
+                <div class="mt-1 text-lg lg:text-xl font-bold text-ink">簽核層級設定工具 — VTP 廠區</div>
+              </div>
+              <div class="text-right shrink-0 ml-4">
+                <div class="num text-3xl lg:text-4xl font-extrabold text-gold leading-none">58</div>
+                <div class="mt-1 text-[13px] text-muted">positions / 一頁完成</div>
+              </div>
+            </div>
+
+            <!-- Three flows visualization -->
+            <div class="mt-5">
+              <div class="text-[13.5px] font-bold text-steel tracking-[0.18em] mb-3">依品項設定 — 三種流程</div>
+              <div class="grid grid-cols-3 gap-2.5">
+                <div class="rounded-lg border border-forest/30 bg-forest/5 p-3">
+                  <div class="text-forest font-bold text-[14.5px]">原 L3</div>
+                  <div class="mt-1 text-[13.5px] text-muted leading-snug">產區內部<br>完成審批</div>
+                </div>
+                <div class="rounded-lg border border-coral/30 bg-coral/5 p-3">
+                  <div class="text-coral font-bold text-[14.5px]">特殊 / 高單價</div>
+                  <div class="mt-1 text-[13.5px] text-muted leading-snug">走台北<br>V1 ~ V7</div>
+                </div>
+                <div class="rounded-lg border border-steel/30 bg-steel/5 p-3">
+                  <div class="text-steel font-bold text-[14.5px]">其他品項</div>
+                  <div class="mt-1 text-[13.5px] text-muted leading-snug">產區簽<br>+ 通知台北</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Design rationale -->
+            <div class="mt-5 rounded-lg bg-sky/40 border-l-[3px] border-royal px-4 py-3">
+              <div class="text-[13px] font-bold text-royal tracking-[0.18em]">設計關鍵</div>
+              <p class="mt-1.5 text-[13px] text-ink leading-relaxed">
+                凡經過台北的流程,除了簽核 / 通知 <span class="font-bold">台北主管</span> 外,
+                <span class="font-bold text-royal">同步加上「台北該單採購」</span> —
+                因實際的採購數量與價格,是由該單採購告知產區採購的,缺少這個節點會造成資訊斷層。
+              </p>
+            </div>
+
+            <!-- Companion table note -->
+            <div class="mt-3 flex items-center gap-2 text-[14px] text-muted">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-gold"></span>
+              另搭配「品項設定明細表」,每筆料號可獨立指定走哪一條流程。
+            </div>
+          </div>
+          <div class="mt-3 text-[14px] text-muted italic">簽核層級設定工具 — VTP 廠區為例,58 個 position 一頁完成</div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">02</span>
+            <span class="chip bg-sky text-royal">PO  ·  分流檢核</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">產區副料採購單簽核</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            因應採購行為回歸產區副料,特定料需同步通知台北採購並走台北簽核。
+          </p>
+          <div class="mt-5 space-y-3">
+            <div class="flex gap-3 items-start p-3.5 rounded-lg border border-hair bg-white">
+              <span class="num font-extrabold text-forest text-xl leading-none">①</span>
+              <div><div class="text-[14px] font-bold text-ink">原 L3 — 維持產區簽核</div>
+                   <div class="text-[14.5px] text-muted">產區內部完成審批</div></div>
+            </div>
+            <div class="flex gap-3 items-start p-3.5 rounded-lg border border-hair bg-white">
+              <span class="num font-extrabold text-coral text-xl leading-none">②</span>
+              <div><div class="text-[14px] font-bold text-ink">特殊 / 高單價 — V1~V7</div>
+                   <div class="text-[14.5px] text-muted">走台北 V1~V7 簽核流程</div></div>
+            </div>
+            <div class="flex gap-3 items-start p-3.5 rounded-lg border border-hair bg-white">
+              <span class="num font-extrabold text-steel text-xl leading-none">③</span>
+              <div><div class="text-[14px] font-bold text-ink">其他品項 — 產區 + 通知</div>
+                   <div class="text-[14.5px] text-muted">產區簽 + 同步通知台北採購</div></div>
+            </div>
+          </div>
+          <div class="mt-5 px-4 py-3 rounded-lg bg-navy text-white text-[13px]">
+            <span class="text-gold font-bold mr-2">主動監控</span>
+            Concurrent 失敗時自動寄信通知 MIS,SQLCODE / Backtrace / 失敗 PO 都帶在信裡。
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 03 主副料拋帳平台 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">03</span>
+            <span class="chip bg-sky text-royal">AP  ·  3 段式拋帳</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">主副料拋帳平台</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            會計每月需手動逐筆 key unAPInvoice 立帳 — 費時且易出錯。
+          </p>
+          <!-- 3-stage flow -->
+          <div class="mt-5 grid grid-cols-3 gap-2 text-center">
+            <div class="rounded-lg bg-sky border border-hair p-3">
+              <div class="text-[13px] font-bold text-royal">①  unAPInvoice</div>
+              <div class="text-[14px] text-body2 mt-1">待拋帳資料</div>
+            </div>
+            <div class="rounded-lg bg-navy text-white p-3">
+              <div class="text-[13px] font-bold text-gold">②  Import 平台</div>
+              <div class="text-[14px] text-cyan2 mt-1">一鍵拋帳</div>
+            </div>
+            <div class="rounded-lg bg-sky border border-hair p-3">
+              <div class="text-[13px] font-bold text-royal">③  AP 自動建檔</div>
+              <div class="text-[14px] text-body2 mt-1">完整對帳鏈</div>
+            </div>
+          </div>
+          <div class="mt-5 p-4 rounded-lg border border-hair bg-paper">
+            <div class="text-[13px] tracking-[0.2em] font-bold text-royal">協作模式</div>
+            <div class="mt-2 text-[14px] text-ink"><span class="font-bold">Roger</span>  ─ 前端 UI (APEX)
+              <span class="mx-2 text-muted">·</span>
+              <span class="font-bold">Hanson</span> ─ 後端拋帳邏輯</div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <div class="frame"><img src="assets/img8.jpg" alt="unAPInvoice 主畫面" loading="lazy"/></div>
+          <div class="mt-3 text-[14px] text-muted italic">unAPInvoice 清單頁 — Interactive Grid + 條件搜尋 + 一鍵拋帳</div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 04 越南海關 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <!-- before / after split -->
+          <div class="rounded-2xl border border-hair overflow-hidden shadow-card">
+            <div class="grid grid-cols-2">
+              <div class="p-5 lg:p-6 bg-paper border-r border-hair">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-coral"></span>
+                  <span class="text-[12px] tracking-[0.25em] font-bold text-coral">OLD</span></div>
+                <div class="mt-2 text-[14px] text-body2">Target Type:</div>
+                <div class="mt-1 text-[15px] font-bold text-ink mono">APEX Collection</div>
+                <div class="text-[14px] text-muted mono">C001 ~ C050 寫死</div>
+              </div>
+              <div class="p-5 lg:p-6 bg-white">
+                <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-forest"></span>
+                  <span class="text-[12px] tracking-[0.25em] font-bold text-forest">NEW</span></div>
+                <div class="mt-2 text-[14px] text-body2">Target Type:</div>
+                <div class="mt-1 text-[15px] font-bold text-ink mono">Table · MK_GENERIC_STG</div>
+                <div class="text-[14px] text-muted mono">56 cols · 突破上限</div>
+              </div>
+            </div>
+            <div class="px-5 py-3 border-t border-hair bg-navy text-white text-[14.5px] flex items-center gap-2">
+              <span class="text-gold font-bold">+</span>
+              新版多 <span class="font-bold">Merge loading method</span>,後續欄位擴充更彈性
+            </div>
+          </div>
+          <div class="mt-3 text-[14px] text-muted italic">SALES_UPLOAD_OLD → SALEX_UPLOAD_NEW · 配合海關格式變更的機制重構</div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">04</span>
+            <span class="chip bg-sky text-royal">GL  ·  機制重構</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">越南海關銷收拋帳修改</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            海關上傳檔案格式異動,欄位從 ≤50 增加為 56 — 舊架構寫死 50 欄位,需重構。
+          </p>
+          <div class="mt-5 space-y-2 text-[13px] text-ink">
+            <div class="flex gap-2"><span class="text-cyan2 font-bold mono">①</span>
+              Code Review 舊有結構</div>
+            <div class="flex gap-2"><span class="text-cyan2 font-bold mono">②</span>
+              提改版方向 + 規劃 + 開發</div>
+          </div>
+          <div class="mt-5 inline-flex items-center gap-2 text-[14.5px] text-muted">
+            <span class="px-2 py-0.5 rounded-md bg-coral/10 text-coral font-bold">USER:王凰凰</span>回報海關格式異動
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 05 BGD AP→GL ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">05</span>
+            <span class="chip bg-gold/15 text-gold">AI 接管 90%</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">BGD RPA AP→GL</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            RPA bot 已把資料入到 AP,但 AP→GL 仍需人工逐筆。<br>porting 越南版,AI 全程接管。
+          </p>
+          <!-- 32→3 hour hero -->
+          <div class="mt-6 relative rounded-2xl bg-gradient-to-br from-navy to-[#0a1f3d] text-white p-6 shadow-card overflow-hidden">
+            <!-- Decorative glow -->
+            <div class="pointer-events-none absolute -top-16 -right-16 w-44 h-44 rounded-full bg-gold/10 blur-3xl"></div>
+            <div class="pointer-events-none absolute -bottom-20 -left-12 w-40 h-40 rounded-full bg-cyan2/10 blur-3xl"></div>
+
+            <!-- Header row -->
+            <div class="relative flex items-center justify-between">
+              <div class="text-[12px] tracking-[0.25em] font-bold text-gold">PROJECTED  vs  ACTUAL</div>
+              <div class="text-[12px] tracking-[0.18em] font-bold text-cyan2 px-2.5 py-1 rounded-full border border-cyan2/35 bg-cyan2/10">
+                ↓ 90% 工時
+              </div>
+            </div>
+
+            <!-- Big numbers comparison -->
+            <div class="relative mt-5 flex items-end gap-5">
+              <div class="flex flex-col items-start">
+                <div class="text-[11.5px] tracking-[0.2em] font-bold text-white/45">PREDICTED</div>
+                <div class="mt-1.5 flex items-baseline">
+                  <span class="text-4xl num font-bold text-white/35 line-through decoration-2 decoration-coral/80">32</span>
+                  <span class="ml-1 text-sm text-white/35 font-bold tracking-wider">HR</span>
+                </div>
+              </div>
+              <div class="pb-2.5 text-2xl text-gold/70 leading-none">→</div>
+              <div class="flex flex-col items-start">
+                <div class="text-[11.5px] tracking-[0.2em] font-bold text-gold">ACTUAL</div>
+                <div class="mt-1.5 flex items-baseline">
+                  <span class="text-5xl num font-extrabold text-gold">3</span>
+                  <span class="ml-1.5 text-base text-gold font-bold tracking-wider">HR</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Proportional bar visualization -->
+            <div class="relative mt-5">
+              <div class="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-gold to-cyan2" style="width: 9.4%"></div>
+              </div>
+              <div class="mt-2 flex justify-between text-[12.5px] text-white/55">
+                <span class="font-bold text-gold/90">3 HR 實際</span>
+                <span>32 HR 預估</span>
+              </div>
+            </div>
+
+            <!-- Footer badge -->
+            <div class="relative mt-5 pt-4 border-t border-white/10 flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-cyan2/15 border border-cyan2/30 text-cyan2 text-[13px] font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan2 animate-pulse"></span>USER 王凰凰確認可上線
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <div class="rounded-2xl border border-hair bg-white p-6 lg:p-7 shadow-soft">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-hair pb-4">
+              <div>
+                <div class="text-[13px] tracking-[0.25em] font-bold text-steel">DEV WORKFLOW</div>
+                <div class="mt-1 text-base lg:text-lg font-bold text-ink">
+                  BGD 開發流程 — <span class="text-royal">人類</span> <span class="text-muted text-sm">vs</span> <span class="text-coral">AI</span> 分工
+                </div>
+              </div>
+              <div class="hidden md:flex flex-col items-end shrink-0 ml-3">
+                <span class="text-[12px] tracking-[0.18em] font-bold text-coral">AI 接管</span>
+                <span class="num text-2xl font-extrabold text-coral leading-none mt-0.5">~60%</span>
+              </div>
+            </div>
+
+            <!-- 7-step flow -->
+            <div class="mt-5">
+              <div class="grid grid-cols-7 gap-1 lg:gap-1.5">
+                <!-- 1 -->
+                <div class="flex flex-col items-center rounded-lg border border-royal/25 bg-royal/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-royal/60">01</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">給規格</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-royal text-white text-[11.5px] font-bold">人</div>
+                </div>
+                <!-- 2 -->
+                <div class="flex flex-col items-center rounded-lg border border-coral/25 bg-coral/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-coral/70">02</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">規格比對</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-coral text-white text-[11.5px] font-bold">AI</div>
+                </div>
+                <!-- 3 -->
+                <div class="flex flex-col items-center rounded-lg border border-coral/25 bg-coral/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-coral/70">03</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">產 MD</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-coral text-white text-[11.5px] font-bold">AI</div>
+                </div>
+                <!-- 4 -->
+                <div class="flex flex-col items-center rounded-lg border border-royal/25 bg-royal/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-royal/60">04</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">Review<br>MD</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-royal text-white text-[11.5px] font-bold">人</div>
+                </div>
+                <!-- 5 -->
+                <div class="flex flex-col items-center rounded-lg border border-coral/25 bg-coral/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-coral/70">05</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">改寫<br>code</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-coral text-white text-[11.5px] font-bold">AI</div>
+                </div>
+                <!-- 6 -->
+                <div class="flex flex-col items-center rounded-lg border border-royal/25 bg-royal/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-royal/60">06</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">Review<br>code</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-royal text-white text-[11.5px] font-bold">人</div>
+                </div>
+                <!-- 7 -->
+                <div class="flex flex-col items-center rounded-lg border border-forest/30 bg-forest/5 px-1 py-2.5">
+                  <div class="text-[11px] num font-bold text-forest/70">07</div>
+                  <div class="mt-1 text-[13.5px] lg:text-[14px] font-bold text-ink leading-tight text-center">上線</div>
+                  <div class="mt-1.5 px-1.5 py-0.5 rounded-md bg-forest text-white text-[11.5px] font-bold">OK</div>
+                </div>
+              </div>
+              <!-- Flow indicator below -->
+              <div class="mt-2 h-1 w-full rounded-full bg-gradient-to-r from-royal/40 via-coral/40 to-forest/60"></div>
+            </div>
+
+            <!-- Two-column summary -->
+            <div class="mt-5 grid md:grid-cols-2 gap-3">
+              <div class="rounded-lg border border-royal/25 bg-royal/5 p-3.5">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-royal text-white text-[13px] font-bold">人</span>
+                  <span class="text-[14.5px] font-bold text-royal">人類做 · 3 個環節</span>
+                </div>
+                <div class="mt-2 text-[13px] text-ink">
+                  <span class="font-bold">想法</span> + <span class="font-bold">Review</span> + <span class="font-bold">對答案</span>
+                </div>
+              </div>
+              <div class="rounded-lg border border-coral/25 bg-coral/5 p-3.5">
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-md bg-coral text-white text-[13px] font-bold">AI</span>
+                  <span class="text-[14.5px] font-bold text-coral">AI 接管 · 3 個環節</span>
+                </div>
+                <div class="mt-2 text-[13px] text-ink">
+                  <span class="font-bold">比對</span> + 寫 <span class="font-bold">MD</span> + 改 <span class="font-bold">code</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 text-[14px] text-muted italic">7 步開發流程 — 人類 vs AI 分工,AI 接管 ~60% 環節</div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 06 PR BY CPO ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl border border-hair bg-white p-6 lg:p-7 shadow-soft">
+            <!-- Header -->
+            <div class="flex items-center justify-between border-b border-hair pb-4">
+              <div>
+                <div class="text-[13px] tracking-[0.25em] font-bold text-steel">PERFORMANCE TUNING</div>
+                <div class="mt-1 text-base lg:text-lg font-bold text-ink">
+                  Block 來源:<span class="text-coral mx-1">Table</span><span class="text-muted">→</span><span class="text-forest mx-1">View</span>
+                </div>
+              </div>
+              <div class="hidden md:flex flex-col items-end shrink-0 ml-3">
+                <span class="text-[12px] tracking-[0.18em] font-bold text-forest">SPEEDUP</span>
+                <span class="num text-2xl font-extrabold text-forest leading-none mt-0.5">2.4 ×</span>
+              </div>
+            </div>
+
+            <!-- Before / After comparison -->
+            <div class="mt-5 grid md:grid-cols-[1fr_auto_1fr] gap-3 md:gap-4 items-stretch">
+
+              <!-- BEFORE -->
+              <div class="relative rounded-xl border-2 border-coral/30 bg-coral/5 p-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-[12px] tracking-[0.2em] font-bold text-coral">BEFORE</span>
+                  <span class="text-[12.5px] text-coral/80 font-bold">優化前</span>
+                </div>
+                <div class="mt-3 space-y-1.5">
+                  <div class="text-[14.5px] text-ink">
+                    Block 來源 = <span class="font-bold text-coral">Table</span>
+                  </div>
+                  <div class="text-coral/40 text-xs leading-none">↓</div>
+                  <div class="text-[14px] text-ink/85">
+                    Block-Trigger 內<br>逐筆 fetch 資料
+                  </div>
+                  <div class="text-coral/40 text-xs leading-none">↓</div>
+                  <div class="text-[14.5px] font-bold text-coral">All Scan 全表掃描</div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-coral/20 text-center">
+                  <div class="num font-extrabold text-coral text-3xl lg:text-4xl leading-none tracking-tight">3:22</div>
+                  <div class="mt-1 text-[13px] text-coral/70">3 分 22 秒</div>
+                </div>
+              </div>
+
+              <!-- Center metric -->
+              <div class="flex md:flex-col items-center justify-center gap-2 md:gap-3 px-2">
+                <div class="flex flex-col items-center">
+                  <div class="text-[11.5px] tracking-[0.18em] font-bold text-steel">效能提升</div>
+                  <div class="num text-2xl lg:text-3xl font-extrabold text-forest leading-none mt-0.5">58<span class="text-base align-top">%</span></div>
+                </div>
+                <div class="hidden md:flex w-10 h-10 rounded-full bg-gradient-to-br from-forest to-cyan2 items-center justify-center shadow-soft">
+                  <span class="text-white text-lg font-bold">→</span>
+                </div>
+                <div class="md:hidden text-2xl text-forest">→</div>
+                <div class="flex flex-col items-center">
+                  <div class="text-[11.5px] tracking-[0.18em] font-bold text-steel">速度</div>
+                  <div class="num text-xl font-extrabold text-cyan2 leading-none mt-0.5">× 2.4</div>
+                </div>
+              </div>
+
+              <!-- AFTER -->
+              <div class="relative rounded-xl border-2 border-forest/35 bg-forest/5 p-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-[12px] tracking-[0.2em] font-bold text-forest">AFTER</span>
+                  <span class="text-[12.5px] text-forest font-bold">優化後</span>
+                </div>
+                <div class="mt-3 space-y-1.5">
+                  <div class="text-[14.5px] text-ink">
+                    Block 來源 = <span class="font-bold text-forest">View</span>
+                  </div>
+                  <div class="text-forest/40 text-xs leading-none">↓</div>
+                  <div class="text-[14px] text-ink/85">
+                    資料邏輯整合<br>在 View 層
+                  </div>
+                  <div class="text-forest/40 text-xs leading-none">↓</div>
+                  <div class="text-[14.5px] font-bold text-forest">一次查詢</div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-forest/25 text-center">
+                  <div class="num font-extrabold text-forest text-3xl lg:text-4xl leading-none tracking-tight">1:24</div>
+                  <div class="mt-1 text-[13px] text-forest/80">1 分 24 秒</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 text-[14px] text-muted italic">Block from Table → View · D2K Form 效能優化關鍵切入點</div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">06</span>
+            <span class="chip bg-sky text-royal">PR  ·  效能優化</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">PR BY CPO 效能優化</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            搜尋 / 調整數量 / 滾輪等待過長,RPA 接續處理塞車。<br>
+            最終定位到 D2K Form Block-Trigger 內 fetch 時 All Scan,把 Block 由 Table 改為 View,邏輯下放到 View 層。
+          </p>
+          <!-- before after metric -->
+          <div class="mt-6 grid grid-cols-3 items-center gap-2">
+            <div class="text-center p-4 rounded-xl bg-paper border border-hair">
+              <div class="text-[12px] tracking-[0.25em] font-bold text-coral">BEFORE</div>
+              <div class="mt-1 text-3xl num font-extrabold text-steel">3:22</div>
+              <div class="text-[13px] text-muted">12/18 ver1</div>
+            </div>
+            <div class="text-center text-2xl text-gold">→</div>
+            <div class="text-center p-4 rounded-xl bg-navy text-white">
+              <div class="text-[12px] tracking-[0.25em] font-bold text-gold">AFTER</div>
+              <div class="mt-1 text-3xl num font-extrabold text-gold">1:24</div>
+              <div class="text-[13px] text-cyan2">12/23 ver2</div>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3 text-[14px]">
+            <span class="chip bg-forest/10 text-forest">−58 % 時間</span>
+            <span class="chip bg-cyan2/15 text-royal">速度 × 2.4</span>
+            <span class="chip bg-sky text-royal">USER 王嘉瑜 確認</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 07 實際成本改版 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">07</span>
+            <span class="chip bg-gold/15 text-gold">COST  ·  進行中</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">實際成本改版</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            把 VBA 維護的實際成本邏輯,搬到 APEX 上重做 — 下半年大改造。
+          </p>
+          <div class="mt-5 px-4 py-3 rounded-xl bg-paper border border-hair text-[13px] text-body2">
+            <span class="font-bold text-navy">V → A</span>  · 從 VBA 切換到 APEX,流程化、可審核、可重跑。
+          </div>
+        </div>
+        <div class="lg:col-span-7 order-1 lg:order-2">
+          <div class="rounded-2xl border border-hair p-8 bg-gradient-to-br from-paper to-white shadow-card">
+            <div class="grid grid-cols-2 gap-6 items-center">
+              <div class="text-center p-6 rounded-xl bg-white border border-hair">
+                <div class="text-[12px] tracking-[0.25em] font-bold text-muted">FROM</div>
+                <div class="mt-2 text-3xl font-extrabold text-coral">VBA</div>
+                <div class="text-[14px] text-muted mt-1">分散維護</div>
+              </div>
+              <div class="text-center p-6 rounded-xl bg-navy text-white">
+                <div class="text-[12px] tracking-[0.25em] font-bold text-gold">TO</div>
+                <div class="mt-2 text-3xl font-extrabold text-gold-2">APEX</div>
+                <div class="text-[14px] text-cyan2 mt-1">統一平台</div>
+              </div>
+            </div>
+            <div class="mt-6 text-center text-[14px] text-body2 italic">下半年大改造 · H2 進入主要開發期</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ── PROJECT 08 商品存貨 ── -->
+      <article class="proj reveal grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl border border-hair bg-white p-6 lg:p-7 shadow-soft">
+            <!-- Header -->
+            <div class="text-center pb-4 border-b border-hair">
+              <div class="text-[13px] tracking-[0.25em] font-bold text-steel">BUSINESS MODEL SHIFT</div>
+              <div class="mt-1.5 text-base lg:text-lg font-bold text-ink">業務交易模式變更 — <span class="text-gold">為何要記商品存貨</span></div>
+            </div>
+
+            <!-- Two-mode comparison -->
+            <div class="mt-5 relative grid md:grid-cols-2 gap-4 md:gap-6">
+
+              <!-- VS center badge (absolute on md+) -->
+              <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                <span class="w-9 h-9 rounded-full bg-ink text-white text-[13px] font-extrabold tracking-wider flex items-center justify-center shadow-card border-2 border-white">VS</span>
+              </div>
+
+              <!-- LEFT: MTO 舊模式 -->
+              <div class="rounded-xl border border-steel/25 bg-steel/5 overflow-hidden">
+                <div class="bg-steel text-white px-4 py-2.5 text-center">
+                  <span class="text-[14.5px] font-bold">接單式生產</span>
+                  <span class="ml-1 text-[13px] text-white/75">(MTO,舊模式)</span>
+                </div>
+                <div class="p-4">
+                  <!-- Flow -->
+                  <div class="flex items-center justify-center gap-1.5">
+                    <div class="flex flex-col items-center">
+                      <div class="w-12 h-12 rounded-full bg-white border-2 border-steel/40 flex items-center justify-center text-[12.5px] font-bold text-steel leading-tight text-center">USER<br>下單</div>
+                    </div>
+                    <span class="text-steel/50 text-sm">→</span>
+                    <div class="flex flex-col items-center">
+                      <div class="w-12 h-12 rounded-full bg-white border-2 border-steel/40 flex items-center justify-center text-[12.5px] font-bold text-steel leading-tight text-center">投入<br>生產</div>
+                    </div>
+                    <span class="text-steel/50 text-sm">→</span>
+                    <div class="flex flex-col items-center">
+                      <div class="w-12 h-12 rounded-full bg-white border-2 border-steel/40 flex items-center justify-center text-[12.5px] font-bold text-steel leading-tight text-center">出貨</div>
+                    </div>
+                  </div>
+                  <!-- Note -->
+                  <div class="mt-4 text-center text-[14.5px] text-ink/85 leading-relaxed">
+                    訂單一對一對應生產 + 成本<br>
+                    <span class="text-steel font-bold">→ 舊算法直接歸屬即可</span>
+                  </div>
+                </div>
+                <!-- Conclusion -->
+                <div class="mx-4 mb-4 rounded-lg bg-white border border-steel/25 px-3 py-2.5 text-center text-[14.5px] font-bold text-steel">
+                  成本歸屬清楚,不需追庫存
+                </div>
+              </div>
+
+              <!-- RIGHT: MTS 新模式 -->
+              <div class="rounded-xl border-2 border-forest/35 bg-forest/5 overflow-hidden shadow-soft">
+                <div class="bg-forest text-white px-4 py-2.5 text-center">
+                  <span class="text-[14.5px] font-bold">非接單式生產</span>
+                  <span class="ml-1 text-[13px] text-white/85">(MTS,新模式)</span>
+                </div>
+                <div class="p-4">
+                  <!-- Flow -->
+                  <div class="flex items-center justify-center gap-1">
+                    <div class="flex flex-col items-center">
+                      <div class="w-11 h-11 rounded-full bg-white border-2 border-forest/45 flex items-center justify-center text-[12.5px] font-bold text-forest leading-tight text-center">先<br>生產</div>
+                    </div>
+                    <span class="text-forest/60 text-sm">→</span>
+                    <!-- 入庫 with highlight -->
+                    <div class="flex flex-col items-center">
+                      <div class="relative w-11 h-11 rounded-full bg-coral border-2 border-coral flex items-center justify-center text-[12.5px] font-bold text-white leading-tight text-center">入庫</div>
+                    </div>
+                    <span class="text-forest/60 text-sm">→</span>
+                    <div class="flex flex-col items-center">
+                      <div class="w-11 h-11 rounded-full bg-white border-2 border-forest/45 flex items-center justify-center text-[12.5px] font-bold text-forest leading-tight text-center">等<br>訂單</div>
+                    </div>
+                    <span class="text-forest/60 text-sm">→</span>
+                    <div class="flex flex-col items-center">
+                      <div class="w-11 h-11 rounded-full bg-white border-2 border-forest/45 flex items-center justify-center text-[12.5px] font-bold text-forest leading-tight text-center">出庫</div>
+                    </div>
+                  </div>
+                  <!-- Highlight callout for 入庫 -->
+                  <div class="mt-3 mx-auto max-w-[250px] rounded-md bg-coral/10 border border-coral/35 px-3 py-1.5 text-center text-[13.5px] font-bold text-coral">
+                    ↑ 商品存貨需追蹤
+                  </div>
+                  <!-- Note -->
+                  <div class="mt-3 text-center text-[14.5px] text-ink/85 leading-relaxed">
+                    先入庫 → 等訂單才到出庫<br>
+                    <span class="text-coral font-bold">→ 必須記庫存供管理決策</span>
+                  </div>
+                </div>
+                <!-- Conclusion -->
+                <div class="mx-4 mb-4 rounded-lg bg-forest text-white px-3 py-2.5 text-center text-[14.5px] font-bold">
+                  需新增進銷存記錄,以利成本計算
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-3 text-[14px] text-muted italic">MTS 模式 — 先生產入庫、等訂單再出庫,庫存需被追蹤</div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-3">
+            <span class="text-gold num font-extrabold text-2xl">08</span>
+            <span class="chip bg-gold/15 text-gold">COST  ·  AI 寫 90%+</span>
+          </div>
+          <h3 class="mt-3 text-2xl lg:text-3xl font-bold text-ink">生產成本 — 商品存貨</h3>
+          <p class="mt-3 text-body2 leading-relaxed">
+            公司承接「非接單式生產」(MTS)訂單。客戶下單前先生產入庫,等訂單來才出庫 —
+            必須記錄商品存貨,成本歸屬機制需要重構。
+          </p>
+          <!-- progress timeline -->
+          <div class="mt-6">
+            <div class="text-[13px] tracking-[0.2em] font-bold text-royal mb-3">PROGRESS</div>
+            <ol class="space-y-3">
+              <li class="flex gap-3 items-center">
+                <span class="w-5 h-5 rounded-full bg-forest grid place-content-center text-white text-[13px] leading-none">✓</span>
+                <span class="text-[13px] text-ink font-bold">開發完成</span>
+                <span class="text-[14px] text-muted">AI 寫 90%+</span>
+              </li>
+              <li class="flex gap-3 items-center">
+                <span class="w-5 h-5 rounded-full bg-gold grid place-content-center text-white text-[13px] leading-none">✓</span>
+                <span class="text-[13px] text-ink font-bold">平行測試中</span>
+                <span class="text-[14px] text-muted">正式區並行跑 · 4 月對帳</span>
+              </li>
+              <li class="flex gap-3 items-center">
+                <span class="w-5 h-5 rounded-full border-2 border-cyan2 bg-white"></span>
+                <span class="text-[13px] text-body2">5 月底切換 / 舊系統下架</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── METHODOLOGY (AI協作) ─────────────────────────── -->
+<section id="methodology" class="relative py-24 lg:py-32 bg-navy text-white overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+  <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-cyan2/15 blur-3xl"></div>
+  <div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-gold/15 blur-3xl"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">METHODOLOGY</div>
+      <h2 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+        AI 協作辦法<span class="text-gold">.</span>
+      </h2>
+      <p class="mt-3 text-cyan2 italic max-w-3xl">
+        從「AI 寫 code」進化到「AI 規劃 feature」 — 我做 想法 + Review + 對答案。
+      </p>
+    </div>
+
+    <!-- Coder → Reviewer big quote -->
+    <div class="mt-12 grid lg:grid-cols-12 gap-6 reveal items-stretch">
+      <div class="lg:col-span-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm p-7 flex flex-col justify-center">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold">ROLE SHIFT</div>
+        <div class="mt-3 text-3xl lg:text-4xl font-extrabold leading-tight">
+          <span class="text-white/40 line-through decoration-coral/60 decoration-2">Coder</span>
+          <span class="text-gold">→</span>
+          <span class="text-white">Reviewer</span>
+        </div>
+        <p class="mt-4 text-white/85 leading-relaxed text-[16px]">
+          AI 接管 <span class="text-gold font-semibold">規格比對 / 寫 MD / 改 code</span>,
+          我把時間花在 <span class="text-cyan2 font-semibold">想法 + Review + 對答案</span>。
+        </p>
+      </div>
+      <div class="lg:col-span-7 grid grid-cols-3 gap-3">
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center flex flex-col justify-center min-h-[170px]">
+          <div class="text-[13px] tracking-[0.22em] font-bold text-cyan2 leading-none">AI 接管</div>
+          <div class="mt-4 num text-5xl font-extrabold text-white leading-none flex items-center justify-center">~60%</div>
+          <div class="mt-3 text-[14px] text-white/70 leading-none">環節</div>
+        </div>
+        <div class="rounded-2xl bg-white/5 border border-white/10 p-5 text-center flex flex-col justify-center min-h-[170px]">
+          <div class="text-[13px] tracking-[0.22em] font-bold text-gold leading-none">省工時</div>
+          <div class="mt-4 num text-5xl font-extrabold text-white leading-none flex items-center justify-center">~90%</div>
+          <div class="mt-3 text-[14px] text-white/70 leading-none">BGD AP→GL</div>
+        </div>
+        <div class="rounded-2xl bg-gold/15 border border-gold/30 p-5 text-center flex flex-col justify-center min-h-[170px]">
+          <div class="text-[13px] tracking-[0.22em] font-bold text-gold leading-none">交付速度</div>
+          <div class="mt-4 num text-5xl font-extrabold text-white leading-none flex items-center justify-center">2 d</div>
+          <div class="mt-3 text-[14px] text-gold leading-none">主副料 UI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11-step grid -->
+    <div class="mt-14 reveal">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold">11 步開發實錄  ·  以 BGD AP→GL 為實證</div>
+        <!-- Legend -->
+        <div class="flex items-center gap-3 text-[14.5px]">
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-md bg-amber-400"></span>
+            <span class="text-white/85 font-semibold">AI 接管</span>
+          </span>
+          <span class="inline-flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded-md bg-cyan2"></span>
+            <span class="text-white/85 font-semibold">人類做</span>
+          </span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        <!-- 01 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">01</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">寫規格</div></div>
+        <!-- 02 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">02</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">規格比對</div></div>
+        <!-- 03 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">03</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">比較細節確認</div></div>
+        <!-- 04 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">04</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">開發模式確認</div></div>
+        <!-- 05 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">05</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">細節最後確認</div></div>
+        <!-- 06 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">06</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">AI 程式寫完</div></div>
+        <!-- 07 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">07</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">再次確認規格</div></div>
+        <!-- 08 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">08</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">程式執行範例</div></div>
+        <!-- 09 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">09</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">結果 debug</div></div>
+        <!-- 10 AI -->
+        <div class="rounded-xl bg-amber-400/15 border border-amber-400/40 p-4 hover:bg-amber-400/20 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-amber-300 text-[14px] font-bold">10</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-amber-400/25 text-amber-300 text-[12px] font-bold tracking-wider">AI</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">預期傳票結果</div></div>
+        <!-- 11 人 -->
+        <div class="rounded-xl bg-cyan2/10 border border-cyan2/40 p-4 hover:bg-cyan2/15 transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="num text-cyan2 text-[14px] font-bold">11</span>
+            <span class="px-1.5 py-0.5 rounded-md bg-cyan2/25 text-cyan2 text-[12px] font-bold tracking-wider">人</span>
+          </div>
+          <div class="mt-1.5 text-[16px] font-semibold">準備結案</div></div>
+      </div>
+    </div>
+
+    <!-- ── CHAT MOCKUPS ── -->
+    <div class="mt-20">
+      <div class="reveal">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold mb-3">CONVERSATIONS  ·  跟 AI 怎麼聊</div>
+        <h3 class="text-2xl lg:text-3xl font-bold">四種協作場景 · 取自實戰對話</h3>
+        <p class="mt-2 text-white/60 max-w-2xl text-[14.5px]">把實際與 AI 的對話濃縮成精華 — 看得出每次的角色分工。</p>
+      </div>
+
+      <div class="mt-10 grid lg:grid-cols-2 gap-6 reveal">
+
+        <!-- Conversation 1: 規格比對 -->
+        <div class="rounded-2xl bg-white text-ink p-5 lg:p-6 shadow-card">
+          <div class="flex items-center gap-2 pb-4 border-b border-hair">
+            <span class="w-2.5 h-2.5 rounded-full bg-coral"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gold"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+            <span class="ml-3 text-[13px] tracking-[0.2em] font-bold text-muted">SCENE 01  ·  規格比對 (BGD AP→GL)</span>
+          </div>
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                附上越南版 AP→GL 規格、BGD 這版規格 — 幫我比對差異點,產出 markdown。
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                <div>已完成比對。三個關鍵差異:</div>
+                <ul class="mt-2 ml-4 list-disc text-[13.5px]">
+                  <li>帳本 ID:803 → <span class="font-bold text-navy">804 (BGD)</span></li>
+                  <li>P_USER:VINUSER → <span class="font-bold text-navy">RITAWANG</span></li>
+                  <li>GL date:Hardcode → <span class="font-bold text-navy">參數化區間</span></li>
+                </ul>
+                <div class="mt-2 text-[13px]">其他流程與越南版一致。MD 已產出,要我貼出來嗎?</div>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                好,沿越南 VIN 的命名風格產出 procedure。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversation 2: AI 規劃 feature -->
+        <div class="rounded-2xl bg-white text-ink p-5 lg:p-6 shadow-card">
+          <div class="flex items-center gap-2 pb-4 border-b border-hair">
+            <span class="w-2.5 h-2.5 rounded-full bg-coral"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gold"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+            <span class="ml-3 text-[13px] tracking-[0.2em] font-bold text-muted">SCENE 02  ·  AI 規劃 feature (主副料 IG)</span>
+          </div>
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                我想做 unAPInvoice 清單頁,要可以條件搜尋、勾選後一鍵 Import 拋帳。
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                <div>建議用 APEX Interactive Grid + JS 客製。前後端怎麼搭:</div>
+                <div class="code"><span class="c">// 前端:Vendor / InvNo / Etd 範圍</span>
+<span class="k">apex.region</span>(<span class="s">"un_invoice_ig"</span>).<span class="k">refresh</span>();
+<span class="c">// 勾選後送 APEX_PROCESS</span>
+<span class="k">apex.server.process</span>(<span class="s">"DO_IMPORT"</span>, {x01: rowIds});</div>
+                <div class="mt-2 text-[13px]">後端 PL/SQL 我也順便 Review 了 schema,master/detail 連動建議用 ROW_ID。</div>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                好,Roger 寫前端 / Hanson 寫後端,2 工作天交。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversation 3: 規格在討論中變完整 -->
+        <div class="rounded-2xl bg-white text-ink p-5 lg:p-6 shadow-card">
+          <div class="flex items-center gap-2 pb-4 border-b border-hair">
+            <span class="w-2.5 h-2.5 rounded-full bg-coral"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gold"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+            <span class="ml-3 text-[13px] tracking-[0.2em] font-bold text-muted">SCENE 03  ·  規格在討論中變完整 (商品存貨)</span>
+          </div>
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                MTS 模式下,我要記錄商品存貨的進銷存,成本怎麼歸屬?
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                <div>反問先把規格挖深三個點:</div>
+                <ol class="mt-2 ml-4 list-decimal text-[13.5px]">
+                  <li>cost layer:月平均、FIFO、還是標準成本?</li>
+                  <li>成品入庫的時點:dispatch_note 確認時 vs 工單關單時?</li>
+                  <li>退貨怎麼回推?要不要保留批次?</li>
+                </ol>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                FIFO、dispatch_note 確認時、批次保留。
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                那建議新增 <span class="font-bold mono">inv_cost_layer</span> 表,
+                結構與物件清單我整理在下面 — 你 Review 完我直接寫 SQL。
+                <div class="mt-2 text-[14px] text-muted italic">→ 規格在來回討論中被想得更完整 = 最大副產品</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversation 4: Coder→Reviewer -->
+        <div class="rounded-2xl bg-white text-ink p-5 lg:p-6 shadow-card">
+          <div class="flex items-center gap-2 pb-4 border-b border-hair">
+            <span class="w-2.5 h-2.5 rounded-full bg-coral"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-gold"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+            <span class="ml-3 text-[13px] tracking-[0.2em] font-bold text-muted">SCENE 04  ·  Coder → Reviewer</span>
+          </div>
+          <div class="mt-4 space-y-3">
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                Code 你寫,我 Review + 對答案。
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                <div>已產出完整 PKG,帳本 / USER / 日期皆參數化:</div>
+                <div class="code"><span class="k">APPS.MK_AP_RPA_IMPORT_GL_PKG.MAIN_BGD</span> (
+  ERRBUF       => V_ERRBUF,
+  RETCODE      => V_RETCODE,
+  P_SOB_ID     => <span class="s">804</span>,            <span class="c">-- BGD 帳本</span>
+  P_USER       => <span class="s">'RITAWANG'</span>,     <span class="c">-- BGD User</span>
+  P_DATE_FM    => <span class="s">'2026/04/01'</span>,
+  P_DATE_TO    => <span class="s">'2026/04/27'</span>
+);</div>
+              </div>
+            </div>
+            <div class="flex justify-end">
+              <div class="bubble-user">
+                ✓ Review 通過。執行範例傳給我,我在 Test 區跑一輪。
+              </div>
+            </div>
+            <div class="flex">
+              <div class="bubble-ai">
+                預期傳票筆數 / 金額已對好,結果若一致就 cc 王凰凰結案。
+                <div class="mt-2 text-[14px] text-forest italic">→ 32 HR (預期) → 3 HR (實際)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- conclusion -->
+      <div class="mt-12 rounded-2xl border border-gold/40 bg-gradient-to-r from-gold/10 to-cyan2/10 p-7 reveal">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold">CONCLUSION</div>
+        <p class="mt-3 text-lg lg:text-xl leading-relaxed">
+          AI 接管 <span class="font-bold text-gold">規格比對 / 寫 MD / 改 code</span>,
+          我只做 <span class="font-bold text-cyan2">想法 + Review + 對答案</span> —
+          預期 3-5 工作天 → 實際 <span class="font-bold text-gold mono">3 HR</span>,
+          省 ~90% 工時。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── OTHERS ─────────────────────────── -->
+<section id="others" class="py-24 lg:py-28 bg-paper border-y border-hair">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">OTHERS</div>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink">現有系統開發及維護</h2>
+      <p class="mt-2 text-body2">17 件 Background tasks · 各模組維護與調整</p>
+    </div>
+
+    <div class="mt-10 grid md:grid-cols-2 gap-6 reveal">
+      <div class="rounded-2xl bg-sky border border-hair p-7 shadow-soft">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-royal mb-5">GL  ·  HR  ·  ERP  ·  NFA</div>
+        <ul class="space-y-3 text-[13.5px]">
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">GL</span>北越人薪拋帳</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">GL</span>庶務彈性欄位調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">GL</span>工廠端費用-異損認損調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">GL</span>實際利潤提列數拋轉-改版</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">HR</span>持股信託問題處理</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">ERP</span>ERP 輕量化-Supply Chain</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-royal text-white num">NFA</span>撈 NFA 的資料給 Data 360 平台</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl bg-navy text-white p-7 shadow-card">
+        <div class="text-[13px] tracking-[0.25em] font-bold text-gold mb-5">PO  ·  COST  ·  VBA</div>
+        <ul class="space-y-2.5 text-[13.5px] text-white/90">
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">PO</span>2026 採購簽核架構調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">PO</span>採購合約-新增空合約機制</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">PO</span>採購合約上線後問題處理</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">COST</span>生產成本 Quince 調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">COST</span>實際成本洲稅調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">COST</span>實際成本調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">COST</span>調整營運專案費用計算方式</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">VBA</span>VBA 調整 · TB-SLV 調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">VBA</span>Actual EXCEL 提列數上傳調整</li>
+          <li class="flex gap-3 items-center"><span class="chip bg-gold text-navy num">VBA</span>孟加拉外幣評價報表 debug
+            <span class="ml-auto chip bg-gold/20 text-gold-2 text-[12px]">進行中</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── ROADMAP ─────────────────────────── -->
+<section id="roadmap" class="py-24 lg:py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">ROAD MAP</div>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink">H2 路線圖</h2>
+      <p class="mt-2 text-body2">已知 + 待調整 · 進行中與規劃中項目排序</p>
+    </div>
+
+    <!-- timeline (6 milestone cards) -->
+    <div class="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-5 reveal">
+      <!-- 01 -->
+      <div class="rounded-2xl border border-hair p-5 bg-white shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-muted">M·01</div>
+          <span class="w-3 h-3 rounded-full bg-gold ring-4 ring-gold/15"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-ink">商品存貨</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-gold">進行中</div>
+      </div>
+      <!-- 02 -->
+      <div class="rounded-2xl border border-hair p-5 bg-white shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-muted">M·02</div>
+          <span class="w-3 h-3 rounded-full bg-gold ring-4 ring-gold/15"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-ink">實際成本改版</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-gold">進行中</div>
+      </div>
+      <!-- 03 -->
+      <div class="rounded-2xl border border-hair p-5 bg-white shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-muted">M·03</div>
+          <span class="w-3 h-3 rounded-full bg-gold ring-4 ring-gold/15"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-ink">AI 應用探討</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-gold">進行中</div>
+      </div>
+      <!-- 04 -->
+      <div class="rounded-2xl border border-cyan2/40 p-5 bg-cyan2/5 shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-cyan2">M·04</div>
+          <span class="w-3 h-3 rounded-full bg-cyan2 ring-4 ring-cyan2/15"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-ink">南越薪資拋帳</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-cyan2">規劃中</div>
+      </div>
+      <!-- 05 -->
+      <div class="rounded-2xl border border-hair p-5 bg-paper shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-muted">M·05</div>
+          <span class="w-3 h-3 rounded-full bg-muted/70 ring-4 ring-muted/10"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-muted">待調整</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-muted">TBD</div>
+      </div>
+      <!-- 06 -->
+      <div class="rounded-2xl border border-hair p-5 bg-paper shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center justify-between">
+          <div class="num text-[15px] font-bold text-muted">M·06</div>
+          <span class="w-3 h-3 rounded-full bg-muted/70 ring-4 ring-muted/10"></span>
+        </div>
+        <div class="mt-3 text-[17px] font-bold text-muted">待調整</div>
+        <div class="mt-1 text-[14px] tracking-[0.15em] font-bold text-muted">TBD</div>
+      </div>
+    </div>
+
+    <!-- decorative road below cards -->
+    <div class="mt-8 reveal">
+      <div class="road"></div>
+    </div>
+
+    <!-- legend -->
+    <div class="mt-10 inline-flex flex-wrap items-center gap-6 px-6 py-3.5 rounded-full border border-hair bg-paper text-[15px] reveal">
+      <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-gold"></span><span class="text-body2"><b class="text-ink">進行中</b> · 商品存貨 / 實際成本改版 / AI 應用探討</span></span>
+      <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-cyan2"></span><span class="text-body2"><b class="text-ink">規劃中</b> · 南越薪資拋帳</span></span>
+      <span class="inline-flex items-center gap-2"><span class="w-3.5 h-3.5 rounded-full bg-muted"></span><span class="text-body2 text-muted">待調整</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── REFLECTIONS ─────────────────────────── -->
+<section id="reflections" class="py-24 lg:py-32 bg-paper border-y border-hair">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="reveal">
+      <div class="kicker text-[13px] tracking-[0.25em] text-gold font-bold">H1 SUMMARY</div>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-extrabold text-ink">四個關鍵收穫</h2>
+      <p class="mt-2 text-body2">從專案到方法論</p>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-6 reveal">
+      <div class="rounded-2xl bg-white border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center gap-3">
+          <span class="num font-extrabold text-gold text-2xl">01</span>
+          <h3 class="text-xl font-bold text-ink">AI 協作的兩種價值</h3>
+        </div>
+        <p class="mt-4 text-body2 leading-relaxed text-[14.5px]">
+          BGD AP→GL <span class="font-bold text-gold">速度</span> (32 HR → 3 HR) 與商品存貨 <span class="font-bold text-cyan2">品質</span> (規格更完整) 兩個案例,
+          讓我學到 AI 既是「省工時」工具,也是「規格設計」助手。
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center gap-3">
+          <span class="num font-extrabold text-cyan2 text-2xl">02</span>
+          <h3 class="text-xl font-bold text-ink">Coder → Reviewer</h3>
+        </div>
+        <p class="mt-4 text-body2 leading-relaxed text-[14.5px]">
+          BGD 拋帳自動化讓我意識到工作正從「敲鍵盤」轉為「對答案」;
+          未來會把更多時間花在思考、Review、與 USER 對話。
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center gap-3">
+          <span class="num font-extrabold text-royal text-2xl">03</span>
+          <h3 class="text-xl font-bold text-ink">規格完整度 比 工時 更值錢</h3>
+        </div>
+        <p class="mt-4 text-body2 leading-relaxed text-[14.5px]">
+          商品存貨改版讓我看到「規格在來回討論中被想得更完整」是最大副產品;
+          未來把跟 AI 討論規格當成 SA 階段必要步驟。
+        </p>
+      </div>
+      <div class="rounded-2xl bg-white border border-hair p-7 shadow-soft hover:shadow-card transition-shadow">
+        <div class="flex items-center gap-3">
+          <span class="num font-extrabold text-forest text-2xl">04</span>
+          <h3 class="text-xl font-bold text-ink">跨人協作要把規格寫前面</h3>
+        </div>
+        <p class="mt-4 text-body2 leading-relaxed text-[14.5px]">
+          主副料拋帳與 Hanson 的前後端分工,
+          讓我學到 SA 階段把介面 / API 規格先談清楚,可以省掉大量後期 rework。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── CONTACT / FOOTER ─────────────────────────── -->
+<section id="contact" class="relative py-24 lg:py-32 bg-navy text-white overflow-hidden">
+  <div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+  <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-cyan2/15 blur-3xl"></div>
+  <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-gold/15 blur-3xl"></div>
+
+  <div class="relative max-w-5xl mx-auto px-6 lg:px-10 text-center reveal">
+    <div class="text-gold text-[14px] tracking-[0.3em] font-bold">MAKALOT  ·  THANKS</div>
+    <h2 class="mt-6 text-7xl sm:text-8xl lg:text-9xl font-extrabold tracking-tight">
+      Thanks!
+    </h2>
+    <p class="mt-6 text-2xl lg:text-3xl italic text-cyan2">Any questions?</p>
+    <div class="mt-12 inline-block px-8 py-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+      <div class="text-[12px] tracking-[0.3em] font-bold text-steel">FIND ME AT</div>
+      <a href="mailto:rogerchen@makalot.com.tw" class="mt-2 block text-2xl lg:text-3xl font-bold mono text-white hover:text-gold-2 transition-colors">
+        rogerchen@makalot.com.tw
+      </a>
+      <div class="mt-2 text-[13px] text-gold-2">Roger Chen  ·  MIS  ·  ERP Application Developer</div>
+    </div>
+    <div class="mt-12 text-[13px] tracking-[0.2em] font-bold text-steel">
+      © 2026 ROGER CHEN  ·  MAKALOT INDUSTRIAL CO., LTD.
+    </div>
+  </div>
+</section>
+
+<script>
+  // scroll progress
+  const progressEl = document.getElementById('progress');
+  function updateProgress() {
+    const h = document.documentElement;
+    const total = h.scrollHeight - h.clientHeight;
+    progressEl.style.width = total > 0 ? (h.scrollTop / total * 100) + '%' : '0%';
+  }
+  document.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // active nav link
+  const navLinks = document.querySelectorAll('.navlink');
+  const sections = ['about','overview','projects','methodology','roadmap','reflections']
+    .map(id => document.getElementById(id));
+  function updateActiveNav() {
+    const sy = window.scrollY + 100;
+    let active = null;
+    for (const sec of sections) {
+      if (!sec) continue;
+      if (sec.offsetTop <= sy) active = sec.id;
+    }
+    navLinks.forEach(l => {
+      const href = l.getAttribute('href') || '';
+      l.classList.toggle('active', href === '#' + active);
+    });
+  }
+  document.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+</script>
+
+</body>
+</html>

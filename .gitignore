@@ -1,0 +1,29 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Office temporary files
+~$*
+*.tmp
+
+# macOS
+.DS_Store
+
+# Editor / IDE
+*.swp
+*.swo
+*.bak
+*~
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
+
+# OS / 備份檔
+*.orig
+*.rej
