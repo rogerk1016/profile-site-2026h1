@@ -75,6 +75,14 @@
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease-out, transform .8s ease-out; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 
+  /* overview data loading animation — bars fill from 0 → target when section reveals */
+  #overview .bar-h { height: 0 !important; transition: height 1.2s cubic-bezier(.22,.9,.3,1) .15s; }
+  #overview .bar-w { width: 0 !important; transition: width 1.2s cubic-bezier(.22,.9,.3,1) .15s; }
+  #overview .reveal.in .bar-h { height: var(--h) !important; }
+  #overview .reveal.in .bar-w { width: var(--w) !important; }
+  /* count-up numbers reserve their final width via invisible placeholder so layout doesn't shift */
+  #overview .count-up { display: inline-block; min-width: 1ch; }
+
   /* nav active link */
   .navlink { position: relative; }
   .navlink::after {
@@ -325,19 +333,19 @@
       <div class="relative bg-white rounded-2xl border border-hair p-7 shadow-soft overflow-hidden">
         <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-navy"></span>
         <div class="text-[13px] tracking-[0.25em] font-bold text-steel">TOTAL WORKS</div>
-        <div class="mt-2 text-6xl font-extrabold num text-navy">27</div>
+        <div class="mt-2 text-6xl font-extrabold num text-navy"><span class="count-up" data-count-to="27">27</span></div>
         <div class="mt-1 text-[13px] text-body2">件 · H1 總工作</div>
       </div>
       <div class="relative bg-white rounded-2xl border border-hair p-7 shadow-soft overflow-hidden">
         <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-forest"></span>
         <div class="text-[13px] tracking-[0.25em] font-bold text-steel">COMPLETION</div>
-        <div class="mt-2 text-6xl font-extrabold num text-forest">85.2%</div>
+        <div class="mt-2 text-6xl font-extrabold num text-forest"><span class="count-up" data-count-to="85.2%">85.2%</span></div>
         <div class="mt-1 text-[13px] text-body2">完成率 <span class="mono">(23 / 27)</span></div>
       </div>
       <div class="group relative bg-white rounded-2xl border border-hair p-7 shadow-soft cursor-help">
         <span class="absolute left-0 top-0 bottom-0 w-1.5 bg-gold rounded-l-2xl"></span>
         <div class="text-[13px] tracking-[0.25em] font-bold text-steel">AI COLLAB</div>
-        <div class="mt-2 text-6xl font-extrabold num text-gold">22.2%</div>
+        <div class="mt-2 text-6xl font-extrabold num text-gold"><span class="count-up" data-count-to="22.2%">22.2%</span></div>
         <div class="mt-1 text-[13px] text-body2">AI 協作比例 <span class="mono">(6 / 27)</span></div>
         <!-- Hover tooltip -->
         <div class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-72 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 z-20">
@@ -356,18 +364,18 @@
         <div class="text-[13px] tracking-[0.25em] font-bold text-navy">型態分布</div>
         <div class="mt-6 grid grid-cols-3 gap-4 items-end h-48">
           <div class="flex flex-col items-center justify-end h-full">
-            <div class="text-[13px] font-bold num text-ink mb-1">15</div>
-            <div class="w-12 bg-navy rounded-t-md" style="height:80%"></div>
+            <div class="text-[13px] font-bold num text-ink mb-1"><span class="count-up" data-count-to="15">15</span></div>
+            <div class="w-12 bg-navy rounded-t-md bar-h" style="--h:80%"></div>
             <div class="mt-2 text-[14px] text-body2">維護</div>
           </div>
           <div class="flex flex-col items-center justify-end h-full">
-            <div class="text-[13px] font-bold num text-ink mb-1">10</div>
-            <div class="w-12 bg-cyan2 rounded-t-md" style="height:55%"></div>
+            <div class="text-[13px] font-bold num text-ink mb-1"><span class="count-up" data-count-to="10">10</span></div>
+            <div class="w-12 bg-cyan2 rounded-t-md bar-h" style="--h:55%"></div>
             <div class="mt-2 text-[14px] text-body2">開發</div>
           </div>
           <div class="flex flex-col items-center justify-end h-full">
-            <div class="text-[13px] font-bold num text-ink mb-1">2</div>
-            <div class="w-12 bg-steel rounded-t-md" style="height:12%"></div>
+            <div class="text-[13px] font-bold num text-ink mb-1"><span class="count-up" data-count-to="2">2</span></div>
+            <div class="w-12 bg-steel rounded-t-md bar-h" style="--h:12%"></div>
             <div class="mt-2 text-[14px] text-body2">其他</div>
           </div>
         </div>
@@ -378,18 +386,18 @@
         <div class="text-[13px] tracking-[0.25em] font-bold text-navy">狀態占比</div>
         <div class="mt-6">
           <div class="text-[14.5px] text-steel font-bold">已完成</div>
-          <div class="mt-1 text-5xl font-extrabold num text-forest">85.2%</div>
+          <div class="mt-1 text-5xl font-extrabold num text-forest"><span class="count-up" data-count-to="85.2%">85.2%</span></div>
           <div class="mt-1 text-[14px] text-body2 mono">23 / 27</div>
         </div>
         <div class="mt-4 flex h-3 rounded-full overflow-hidden bg-hair/40">
-          <div class="bg-forest" style="width:85.2%"></div>
-          <div class="bg-coral" style="width:11.1%"></div>
-          <div class="bg-muted" style="width:3.7%"></div>
+          <div class="bg-forest bar-w" style="--w:85.2%"></div>
+          <div class="bg-coral bar-w" style="--w:11.1%"></div>
+          <div class="bg-muted bar-w" style="--w:3.7%"></div>
         </div>
         <div class="mt-3 flex flex-wrap gap-3 text-[13px] text-body2">
-          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-forest"></span>已完成 23</span>
-          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-coral"></span>進行中 3</span>
-          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-muted"></span>暫停 1</span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-forest"></span>已完成 <span class="count-up" data-count-to="23">23</span></span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-coral"></span>進行中 <span class="count-up" data-count-to="3">3</span></span>
+          <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-sm bg-muted"></span>暫停 <span class="count-up" data-count-to="1">1</span></span>
         </div>
       </div>
 
@@ -399,29 +407,29 @@
         <div class="mt-5 space-y-2 text-[14px]">
           <!-- rows -->
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">GL</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:100%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">7</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal bar-w" style="--w:100%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="7">7</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">PO</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal bar-w" style="--w:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="5">5</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">COST</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal bar-w" style="--w:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="5">5</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">VBA</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal" style="width:71%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">5</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-royal bar-w" style="--w:71%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="5">5</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">PR</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel bar-w" style="--w:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="1">1</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">HR</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel bar-w" style="--w:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="1">1</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">ERP</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel bar-w" style="--w:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="1">1</span></div>
           <div class="flex items-center gap-3"><span class="w-12 text-body2 mono font-bold">AP</span>
-            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel" style="width:14%"></div></div>
-            <span class="w-6 text-right num font-bold text-ink">1</span></div>
+            <div class="flex-1 h-2.5 bg-hair/40 rounded-full overflow-hidden"><div class="h-full bg-steel bar-w" style="--w:14%"></div></div>
+            <span class="w-6 text-right num font-bold text-ink count-up" data-count-to="1">1</span></div>
         </div>
       </div>
     </div>
@@ -1625,9 +1633,42 @@
   document.addEventListener('scroll', updateProgress, { passive: true });
   updateProgress();
 
+  // count-up: animate "0 → target" for any .count-up inside an element entering view.
+  // data-count-to keeps both the visible suffix (e.g. "%") and decimal precision.
+  function runCountUp(root) {
+    root.querySelectorAll('.count-up').forEach(el => {
+      const raw = el.dataset.countTo || el.textContent.trim();
+      const m = raw.match(/^([0-9.,]+)(.*)$/);
+      if (!m) return;
+      const target = parseFloat(m[1].replace(/,/g, ''));
+      const suffix = m[2];
+      const decimals = (m[1].split('.')[1] || '').length;
+      el.textContent = (0).toFixed(decimals) + suffix;
+      const dur = 1100;
+      const t0 = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      function step(now) {
+        const p = Math.min(1, (now - t0) / dur);
+        if (p < 1) {
+          el.textContent = (target * ease(p)).toFixed(decimals) + suffix;
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = raw;
+        }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
   // reveal on scroll
   const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        runCountUp(e.target);
+        io.unobserve(e.target);
+      }
+    });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
